@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8081/admin/notices';
+const API_BASE_URL = 'http://44.246.37.8:8080/admin/notices';
 
 export const useNotice = () => {
   // 초기값 빈 배열로 안전하게 설정

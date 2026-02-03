@@ -37,7 +37,7 @@ export default function MemberManagement() {
     }
 
     try {
-      const res = await axios.get("http://localhost:8081/admin/members", {
+      const res = await axios.get("http://44.246.37.8:8080/admin/members", {
         params: { keyword: finalKeyword },
         headers: { Authorization: `Bearer ${accessToken}` },
       });
@@ -76,7 +76,7 @@ export default function MemberManagement() {
   const requestUpdate = async (body, endpoint, updatedId = null) => {
     try {
       const response = await axios.put(
-        `http://localhost:8081/admin/members/${endpoint}`,
+        `http://44.246.37.8:8080/admin/members/${endpoint}`,
         body,
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );

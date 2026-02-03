@@ -87,10 +87,10 @@ const MyProfilePage = () => {
       console.log('📊 통계 로드 중... memberNo:', memberNo);
       
       const [postsRes, commentsRes, likesRes, bookmarksRes] = await Promise.all([
-        fetch(`http://localhost:8081/members/posts?memberNo=${memberNo}&page=1`),
-        fetch(`http://localhost:8081/members/comments?memberNo=${memberNo}&page=1`),
-        fetch(`http://localhost:8081/members/likes?memberNo=${memberNo}&page=1`),
-        fetch(`http://localhost:8081/members/bookmarks?memberNo=${memberNo}&page=1`)
+        fetch(`http://44.246.37.8:8080/members/posts?memberNo=${memberNo}&page=1`),
+        fetch(`http://44.246.37.8:8080/members/comments?memberNo=${memberNo}&page=1`),
+        fetch(`http://44.246.37.8:8080/members/likes?memberNo=${memberNo}&page=1`),
+        fetch(`http://44.246.37.8:8080/members/bookmarks?memberNo=${memberNo}&page=1`)
       ]);
 
       const [postsData, commentsData, likesData, bookmarksData] = await Promise.all([

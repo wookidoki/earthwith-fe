@@ -64,7 +64,7 @@ const UserFeedEnrollPage = () => {
         });
       }
 
-      const res = await fetch("http://localhost:8081/feeds", {
+      const res = await fetch("http://44.246.37.8:8080/feeds", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

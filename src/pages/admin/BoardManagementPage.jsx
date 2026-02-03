@@ -14,7 +14,7 @@ import ErrorModal from "../admin/ErrorModal";
 import MemberManagement from "./MemberManagement";
 
 const ITEMS_PER_PAGE = 5;
-const API_BASE = "http://localhost:8081/admin";
+const API_BASE = "http://44.246.37.8:8080/admin";
 
 /* =======================================================================
    📌 공통 테이블 컴포넌트

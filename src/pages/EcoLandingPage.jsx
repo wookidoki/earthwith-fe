@@ -6,7 +6,7 @@ const ForestImg = "https://placehold.co/1920x1080/105c28/ffffff?text=Forest";
 const SeaImg = "https://placehold.co/1920x1080/006994/ffffff?text=Sea";
 const SkyImg = "https://placehold.co/1920x1080/87CEEB/ffffff?text=Sky";
 
-const API_BASE_URL = 'http://localhost:8081';
+const API_BASE_URL = 'http://44.246.37.8:8080';
 
 const EcoLandingPage = ({ onNavigate }) => {
   // [수정] 기후시계 훅 제거됨

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext'; // AuthContext 경로 주의
 
 
-const PROFILE_BASE_URL = "http://localhost:8081";
+const PROFILE_BASE_URL = "http://44.246.37.8:8080";
 // 2) 프로필 이미지 URL 정리 함수
 const resolveProfileImageUrl = (raw) => {
   // 값이 없으면 default.jpg
@@ -49,7 +49,7 @@ export const useEcoFeed = () => {
         params.append('fetchOffset', fetchOffset.toString());
       }
 
-      const res = await fetch(`http://localhost:8081/feeds?${params.toString()}`, {
+      const res = await fetch(`http://44.246.37.8:8080/feeds?${params.toString()}`, {
         method: 'GET',
       });
 
@@ -169,7 +169,7 @@ const handleLikeToggle = async (postId) => {
 
   try {
     // 2) 백엔드로 좋아요 토글 요청
-    const res = await fetch(`http://localhost:8081/feeds/${postId}/like`, {
+    const res = await fetch(`http://44.246.37.8:8080/feeds/${postId}/like`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -217,7 +217,7 @@ const handleBookmarkToggle = async (postId) => {
 
   try {
     // 2) 백엔드로 북마크 토글 요청
-    const res = await fetch(`http://localhost:8081/feeds/${postId}/bookmark`, {
+    const res = await fetch(`http://44.246.37.8:8080/feeds/${postId}/bookmark`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -249,7 +249,7 @@ const handleBookmarkToggle = async (postId) => {
 // 댓글 조회
 const fetchComments = useCallback(async (boardNo) => {
   try {
-    const res = await fetch(`http://localhost:8081/comments?boardNo=${boardNo}`, {
+    const res = await fetch(`http://44.246.37.8:8080/comments?boardNo=${boardNo}`, {
       method: 'GET',
     });
 
@@ -337,8 +337,8 @@ const handleCommentToggle = (postId) => {
 
   const isEdit = !!post.editingCommentId;
   const url = isEdit
-    ? `http://localhost:8081/comments/${post.editingCommentId}`
-    : 'http://localhost:8081/comments';
+    ? `http://44.246.37.8:8080/comments/${post.editingCommentId}`
+    : 'http://44.246.37.8:8080/comments';
 
   const method = isEdit ? 'PUT' : 'POST';
 
@@ -392,7 +392,7 @@ const handleCommentDelete = async (postId, commentId) => {
       return;
     }
 
-    const res = await fetch(`http://localhost:8081/comments/${commentId}`, {
+    const res = await fetch(`http://44.246.37.8:8080/comments/${commentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -449,7 +449,7 @@ const handlePostDelete = async (postId) => {
   }
 
   try {
-    const res = await fetch(`http://localhost:8081/feeds/${postId}/delete`, {
+    const res = await fetch(`http://44.246.37.8:8080/feeds/${postId}/delete`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -487,7 +487,7 @@ const handleReportSubmit = async (postId, reason, content) => {
   }
 
   try {
-    const res = await fetch(`http://localhost:8081/boards/${postId}/reports`, {
+    const res = await fetch(`http://44.246.37.8:8080/boards/${postId}/reports`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -532,7 +532,7 @@ const handleCommentReportSubmit = async (commentId, reason, content) => {
 
   try {
     const res = await fetch(
-      `http://localhost:8081/comments/${commentId}/reports`,
+      `http://44.246.37.8:8080/comments/${commentId}/reports`,
       {
         method: "POST",
         headers: {

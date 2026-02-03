@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext'; // AuthContext 경로 확인 필요
 
-const API_BASE_URL = 'http://localhost:8081'; // 서버 주소
+const API_BASE_URL = 'http://44.246.37.8:8080'; // 서버 주소
 
 export const useComment = () => {
   const { auth } = useAuth(); // 로그인 정보 가져오기

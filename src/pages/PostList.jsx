@@ -36,10 +36,10 @@ const PostList = () => {
         return;
       }
       
-      console.log('API 요청:', `http://localhost:8081/members/posts?memberNo=${memberNo}&page=${currentPage}`);
+      console.log('API 요청:', `http://44.246.37.8:8080/members/posts?memberNo=${memberNo}&page=${currentPage}`);
       
       const response = await fetch(
-        `http://localhost:8081/members/posts?memberNo=${memberNo}&page=${currentPage}`
+        `http://44.246.37.8:8080/members/posts?memberNo=${memberNo}&page=${currentPage}`
       );
       
       console.log('API 응답 상태:', response.status);

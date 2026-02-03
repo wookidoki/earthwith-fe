@@ -19,7 +19,7 @@ const StatisticsPage = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('http://localhost:8081/stats/dashboard');
+        const response = await fetch('http://44.246.37.8:8080/stats/dashboard');
         
         if (response.ok) {
           const data = await response.json();

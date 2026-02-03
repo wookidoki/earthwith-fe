@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; 
 import { getCategoryStyle } from './useBoardList'; // 이 import는 외부 파일에 정의된 함수를 가져옵니다.
 
-const API_BASE_URL = 'http://localhost:8081';
-const PROFILE_BASE_URL = "http://localhost:8081";
+const API_BASE_URL = 'http://44.246.37.8:8080';
+const PROFILE_BASE_URL = "http://44.246.37.8:8080";
 
 // [헬퍼 함수] 프로필 이미지 URL 처리 헬퍼
 const resolveProfileImageUrl = (raw) => {

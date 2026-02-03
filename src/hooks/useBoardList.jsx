@@ -5,7 +5,7 @@ import {
   FileText, MoreHorizontal 
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:8081';
+const API_BASE_URL = 'http://44.246.37.8:8080';
 
 // 카테고리 설정
 const CATEGORY_CONFIG = {

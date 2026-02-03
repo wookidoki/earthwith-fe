@@ -44,8 +44,8 @@ const EcoFeedPage = () => {
         const todayPostCategory = 'C%';
 
         const [resParticipants, resPost] = await Promise.all([
-          fetch(`http://localhost:8081/stats/today?category=${todayParticipantsCategory}`),
-          fetch(`http://localhost:8081/stats/todayPost?category=${encodeURIComponent(todayPostCategory)}`),
+          fetch(`http://44.246.37.8:8080/stats/today?category=${todayParticipantsCategory}`),
+          fetch(`http://44.246.37.8:8080/stats/todayPost?category=${encodeURIComponent(todayPostCategory)}`),
         ]);
 
         if (resParticipants.ok) {

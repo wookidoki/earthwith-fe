@@ -1,0 +1,56 @@
+name: Deploy React App
+on: 
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest #실행환경 우분투 
+    steps: 
+      - uses: actions/checkout@v4 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - name: Install Dependencies
+        run: npm ci
+      - name: React Project Build
+        run: npm run build
+      - name: Prepare Target Directory
+        uses: appleboy/ssh-action@master
+        with: 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo rm -rf /home/ubuntu/deploy/front/dist
+            mkdir -p /home/ubuntu/deploy/front/dist
+      - name: Deploy React Project To EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "dist/"
+          target: "/home/ubuntu/deploy/front"
+          overwrite: true
+      - name: Fix permissions
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/deploy/front
+            sudo chmod -R 755 /home/ubuntu/deploy/front
+      - name: Restart Container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/deploy
+            docker compose restart web
