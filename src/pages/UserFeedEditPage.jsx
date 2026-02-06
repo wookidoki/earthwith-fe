@@ -89,7 +89,7 @@ const UserFeedEditPage = () => {
 
       const boardNo = post.boardNo ?? post.id;
 
-      const res = await fetch(`http://44.246.37.8:8080/feeds/${boardNo}`, {
+      const res = await fetch(`http://34.218.225.105:8080/api/feeds/${boardNo}`, {
         method: 'PUT',
         headers: {
           Authorization: `Bearer ${token}`,

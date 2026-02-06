@@ -169,7 +169,7 @@ const NoticeDetailModal = ({ notice, onClose, onEdit, onDelete, isAdmin }) => {
                 {files.map((file, index) => (
                   <li key={file.fileNo || index}>
                     <a 
-                      href={`http://44.246.37.8:8080${file.attachmentPath}`} 
+                      href={`http://34.218.225.105:8080/api${file.attachmentPath}`} 
                       download={file.originalFileName}
                       target="_blank"
                       rel="noopener noreferrer"

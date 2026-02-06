@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://44.246.37.8:8080/admin/notices';
+const API_BASE_URL = 'http://34.218.225.105:8080/api/admin/notices';
 
 export const useNotice = () => {
   // 초기값 빈 배열로 안전하게 설정
@@ -19,8 +19,9 @@ export const useNotice = () => {
         headers: { "Authorization": `Bearer ${token}` }
       });
 
-      // 데이터 구조 안전하게 파싱 (List든 PageResponse든 다 처리)
-      const data = response.data;
+      // ResponseData 래퍼에서 data 추출 후 안전하게 파싱
+      const wrapper = response.data;
+      const data = wrapper.data || wrapper;
       let safeContent = [];
       let safeCount = 0;
 
@@ -49,7 +50,7 @@ export const useNotice = () => {
     const response = await axios.get(`${API_BASE_URL}/${boardNo}`, {
         headers: { "Authorization": `Bearer ${token}` }
     });
-    return response.data;
+    return response.data.data || response.data;
   };
 
   // 3. 공지사항 등록 (FormData)

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; 
 import axios from 'axios';
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -49,16 +49,16 @@ export const useLogin = () => {
     // }
 
     try {
-      const result = await axios.post(`${API_BASE_URL}/auth/login`, { 
-        memberId, 
-        memberPwd 
+      const result = await axios.post(`${API_BASE_URL}/auth/login`, {
+        memberId,
+        memberPwd
       });
 
-      // 구조 분해 할당 (원본 코드와 동일한 필드)
-      const { 
-        memberNo, role, memberImage, phone, refRno, memberName, 
-        accessToken, enrollDate, email, refreshToken, memberPoint 
-      } = result.data;
+      // 구조 분해 할당 (ResponseData 래퍼에서 data 추출)
+      const {
+        memberNo, role, memberImage, phone, refRno, memberName,
+        accessToken, enrollDate, email, refreshToken, memberPoint
+      } = result.data.data;
       
       // Context 로그인 함수 호출 (원본 코드와 동일한 12개 인자 순서 유지)
       login(

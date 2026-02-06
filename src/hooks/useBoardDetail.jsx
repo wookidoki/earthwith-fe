@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; 
 import { getCategoryStyle } from './useBoardList'; // 이 import는 외부 파일에 정의된 함수를 가져옵니다.
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
-const PROFILE_BASE_URL = "http://44.246.37.8:8080";
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
+const PROFILE_BASE_URL = "http://34.218.225.105:8080/api";
 
 // [헬퍼 함수] 프로필 이미지 URL 처리 헬퍼
 const resolveProfileImageUrl = (raw) => {
@@ -41,8 +41,8 @@ export const useBoardDetail = (id) => {
             const res = await fetch(`${API_BASE_URL}/comments?boardNo=${id}`);
             if (!res.ok) throw new Error('댓글을 불러오지 못했습니다.');
 
-            const data = await res.json();
-            setComments(data.map(c => ({
+            const commentsResult = await res.json();
+            setComments((commentsResult.data || []).map(c => ({
                 ...c, 
                 memberImage: resolveProfileImageUrl(c.memberImage),
                 regDate: c.regDate
@@ -63,9 +63,10 @@ export const useBoardDetail = (id) => {
                 throw new Error('서버 통신 오류');
             }
 
-            const data = await response.json();
+            const result = await response.json();
+            const data = result.data;
             const style = getCategoryInfoFromCode(data.boardCategory);
-            
+
             setPost({
                 id: data.boardNo,
                 boardNo: data.boardNo,
@@ -84,7 +85,7 @@ export const useBoardDetail = (id) => {
                 isBookmarked: data.bookmarked ?? false,
             });
 
-            if (data.commentList) { 
+            if (data.commentList) {
                 setComments(data.commentList.map(c => ({
                     ...c,
                     memberImage: resolveProfileImageUrl(c.memberImage),

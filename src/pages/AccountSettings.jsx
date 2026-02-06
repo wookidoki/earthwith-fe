@@ -18,7 +18,7 @@ const AccountSettings = ({ currentUser }) => {
   const handleEmailUpdate = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const response = await fetch(`http://44.246.37.8:8080/members/email`, {
+      const response = await fetch(`http://34.218.225.105:8080/api/members/email`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const AccountSettings = ({ currentUser }) => {
   const handlePhoneUpdate = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const response = await fetch(`http://44.246.37.8:8080/members/phone`, {
+      const response = await fetch(`http://34.218.225.105:8080/api/members/phone`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ const AccountSettings = ({ currentUser }) => {
 
     try {
       const token = localStorage.getItem('accessToken');
-      const response = await fetch(`http://44.246.37.8:8080/members/password`, {
+      const response = await fetch(`http://34.218.225.105:8080/api/members/password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ const AccountSettings = ({ currentUser }) => {
     try {
       const memberNo = localStorage.getItem('memberNo');
       const token = localStorage.getItem('accessToken');
-      const response = await fetch(`http://44.246.37.8:8080/members/${memberNo}`, {
+      const response = await fetch(`http://34.218.225.105:8080/api/members/${memberNo}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

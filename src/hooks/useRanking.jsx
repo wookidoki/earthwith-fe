@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
 
 export const useRanking = (isLoggedIn) => {
   const [personalRankList, setPersonalRankList] = useState([]);
@@ -24,8 +24,8 @@ export const useRanking = (isLoggedIn) => {
         if (!response.ok) {
           throw new Error('랭킹 데이터를 불러오는데 실패했습니다.');
         }
-        const data = await response.json();
-        setPersonalRankList(data);
+        const result = await response.json();
+        setPersonalRankList(result.data);
       } catch (err) {
         setError(err instanceof Error ? err.message : String(err));
       } finally {

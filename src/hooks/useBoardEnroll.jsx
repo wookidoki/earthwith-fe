@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; 
 import axios from 'axios';
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
 
 export const useBoardEnroll = () => { 
     const navigate = useNavigate();

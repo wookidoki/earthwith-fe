@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
 
 export const useMainPage = () => {
     const [mainStats, setMainStats] = useState([
@@ -23,8 +23,9 @@ export const useMainPage = () => {
             try {
                 const response = await fetch(`${API_BASE_URL}/stats/landing`); 
                 if (!response.ok) throw new Error('서버 통신 실패: 통계');
-                const data = await response.json();
-                
+                const result = await response.json();
+                const data = result.data;
+
                 setMainStats([
                     { number: data.memberCount?.toLocaleString() || "0", label: "총 환경지킴이" },
                     { number: data.ecoActions?.toLocaleString() || "0", label: "총 에코 활동" },
@@ -41,10 +42,10 @@ export const useMainPage = () => {
 
             setNewsLoading(true);
             try {
-                const response = await fetch(`${API_BASE_URL}/api/news?query=환경`);
+                const response = await fetch(`${API_BASE_URL}/news?query=환경`);
                 if (!response.ok) throw new Error('서버 통신 실패: 뉴스');
-                const data = await response.json();
-                setNewsData(data);
+                const newsResult = await response.json();
+                setNewsData(newsResult.data);
                 setNewsError(null);
             } catch (err) {
                 console.error("뉴스 로딩 실패:", err);

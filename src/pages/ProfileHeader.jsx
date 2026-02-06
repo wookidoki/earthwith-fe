@@ -61,7 +61,7 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
       }
 
       const token = localStorage.getItem('accessToken');
-      const response = await fetch('http://44.246.37.8:8080/members/profile', {
+      const response = await fetch('http://34.218.225.105:8080/api/members/profile', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -124,7 +124,7 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
       return imagePath;
     }
     
-    return `http://44.246.37.8:8080${imagePath}`;
+    return `http://34.218.225.105:8080/api${imagePath}`;
   };
 
   return (

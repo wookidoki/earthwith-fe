@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const AuthContext = createContext();
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

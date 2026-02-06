@@ -5,7 +5,7 @@ import {
   FileText, MoreHorizontal 
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
 
 // 카테고리 설정
 const CATEGORY_CONFIG = {
@@ -94,8 +94,9 @@ export const useBoardList = (pageFilter) => {
             throw new Error(`데이터 로딩 실패 (${response.status}): ${errorText}`);
         }
         
-        const data = await response.json();
-        
+        const result = await response.json();
+        const data = result.data;
+
         setTopPosts(transformData(data.topPosts));
         setListPosts(transformData(data.list));
         setPageInfo(data.pi);

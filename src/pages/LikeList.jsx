@@ -18,7 +18,7 @@ const LikeList = () => {
     try {
       const memberNo = localStorage.getItem('memberNo');
       const response = await fetch(
-        `http://44.246.37.8:8080/members/likes?memberNo=${memberNo}&page=${currentPage}`
+        `http://34.218.225.105:8080/api/members/likes?memberNo=${memberNo}&page=${currentPage}`
       );
       const data = await response.json();
       

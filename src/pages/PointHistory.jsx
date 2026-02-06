@@ -30,7 +30,7 @@ const PointHistory = ({ currentUser }) => {
     try {
       const memberNo = localStorage.getItem('memberNo');
       const response = await fetch(
-        `http://44.246.37.8:8080/members/points?memberNo=${memberNo}&page=${currentPage}&filter=${filter}`
+        `http://34.218.225.105:8080/api/members/points?memberNo=${memberNo}&page=${currentPage}&filter=${filter}`
       );
       const data = await response.json();
       

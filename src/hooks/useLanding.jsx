@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
 
 export const useLanding = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -25,7 +25,8 @@ export const useLanding = () => {
         const response = await fetch(`${API_BASE_URL}/stats/landing`);
         if (!response.ok) throw new Error('서버 통신 실패');
         
-        const data = await response.json();
+        const result = await response.json();
+        const data = result.data;
 
         setStats([
           { number: data.memberCount?.toLocaleString() || "0", label: "함께하는 환경 지킴이" },

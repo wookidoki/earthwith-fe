@@ -24,10 +24,10 @@ const CommentList = () => {
         return;
       }
       
-      console.log('API 요청:', `http://44.246.37.8:8080/members/comments?memberNo=${memberNo}&page=${currentPage}`);
+      console.log('API 요청:', `http://34.218.225.105:8080/api/members/comments?memberNo=${memberNo}&page=${currentPage}`);
       
       const response = await fetch(
-        `http://44.246.37.8:8080/members/comments?memberNo=${memberNo}&page=${currentPage}`
+        `http://34.218.225.105:8080/api/members/comments?memberNo=${memberNo}&page=${currentPage}`
       );
       
       console.log('API 응답 상태:', response.status);

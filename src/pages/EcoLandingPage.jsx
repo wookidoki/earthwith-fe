@@ -6,7 +6,7 @@ const ForestImg = "https://placehold.co/1920x1080/105c28/ffffff?text=Forest";
 const SeaImg = "https://placehold.co/1920x1080/006994/ffffff?text=Sea";
 const SkyImg = "https://placehold.co/1920x1080/87CEEB/ffffff?text=Sky";
 
-const API_BASE_URL = 'http://44.246.37.8:8080';
+const API_BASE_URL = 'http://34.218.225.105:8080/api';
 
 const EcoLandingPage = ({ onNavigate }) => {
   // [수정] 기후시계 훅 제거됨
@@ -37,19 +37,20 @@ const EcoLandingPage = ({ onNavigate }) => {
         const response = await fetch(`${API_BASE_URL}/stats/landing`);
         
         if (response.ok) {
-            const data = await response.json();
-            
+            const result = await response.json();
+            const data = result.data;
+
             // SQL 결과 4가지를 순서대로 매핑
             setStats([
               // 1. 회원 수
               { number: (data.memberCount || 0).toLocaleString() + "명", label: "참여중인 환경 지킴이" },
-              
+
               // 2. 게시글(챌린지) 수
               { number: (data.totalPosts || 0).toLocaleString() + "개", label: "진행중인 챌린지" },
-              
+
               // 3. 에코 액션 (게시글+댓글+좋아요 합계) -> 기후시계 자리에 대체
               { number: (data.ecoActions || 0).toLocaleString() + "건", label: "실천된 에코 액션" },
-              
+
               // 4. 나무 효과
               { number: (data.treeEffect || 0).toLocaleString() + "그루", label: "지구를 살린 나무 효과" }
             ]);

@@ -18,7 +18,7 @@ const BookmarkList = () => {
     try {
       const memberNo = localStorage.getItem('memberNo');
       const response = await fetch(
-        `http://44.246.37.8:8080/members/bookmarks?memberNo=${memberNo}&page=${currentPage}`
+        `http://34.218.225.105:8080/api/members/bookmarks?memberNo=${memberNo}&page=${currentPage}`
       );
       const data = await response.json();
       
