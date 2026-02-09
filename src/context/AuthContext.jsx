@@ -133,10 +133,8 @@ export const AuthProvider = ({ children }) => {
             }
           }
         );
-        console.log("서버 로그아웃 성공");
       }
     } catch (error) {
-      console.error("서버 로그아웃 오류 (클라이언트 초기화 진행):", error);
     } finally {
       // 서버 응답과 관계없이 클라이언트 상태 초기화
       setAuth({ 

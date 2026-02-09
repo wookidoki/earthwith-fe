@@ -54,7 +54,6 @@ export const useEcoFeed = () => {
       });
 
       if(!res.ok) {
-        console.error('피드 불러오기 실패:', res.status);
         return;
       }
 
@@ -126,7 +125,6 @@ export const useEcoFeed = () => {
         // 다음 요청 때 ?fetchOffset=마지막id 로 계속 이어감
       
     } catch (error) {
-      console.error('피드 불러오기 에러:', error);
     } finally {
       setLoading(false);
     }
@@ -177,7 +175,6 @@ const handleLikeToggle = async (postId) => {
     });
 
     if (!res.ok) {
-      console.error('좋아요 요청 실패:', res.status);
       return;
     }
 
@@ -203,7 +200,6 @@ const handleLikeToggle = async (postId) => {
       )
     );
   } catch (error) {
-    console.error('좋아요 처리 중 에러:', error);
   }
 };
 
@@ -228,7 +224,6 @@ const handleBookmarkToggle = async (postId) => {
     });
 
     if (!res.ok) {
-      console.error('북마크 요청 실패:', res.status);
       return;
     }
 
@@ -241,7 +236,6 @@ const handleBookmarkToggle = async (postId) => {
       )
     );
   } catch (error) {
-    console.error('북마크 처리 중 에러:', error);
   }
 };
 
@@ -254,12 +248,10 @@ const fetchComments = useCallback(async (boardNo) => {
     });
 
     if (!res.ok) {
-      console.error('댓글 불러오기 실패:', res.status);
       return;
     }
 
     const data = await res.json(); // List<CommentDTO>
-    console.log('[댓글 응답 data]', data);
     const processed = data.map((c) => ({
       id: c.commentNo,
       user: c.memberId,                         // 작성자 아이디
@@ -279,13 +271,11 @@ const fetchComments = useCallback(async (boardNo) => {
       )
     );
   } catch (err) {
-    console.error('댓글 불러오기 에러:', err);
   }
 }, []);
 
 // 댓글창 토글 + 열 때 댓글 조회
 const handleCommentToggle = (postId) => {
-  console.log('[handleCommentToggle] 클릭, postId = ', postId);
   // 1) 우선 현재 상태 기준으로 isCommentOpen 토글
   setFeedData((prevFeed) =>
     prevFeed.map((post) =>
@@ -331,7 +321,6 @@ const handleCommentToggle = (postId) => {
 
   const accessToken = localStorage.getItem('accessToken');
   if (!accessToken) {
-    console.error('로그인된 토큰이 없습니다. 로그인 후 다시 시도해주세요.');
     return;
   }
 
@@ -362,7 +351,6 @@ const handleCommentToggle = (postId) => {
     });
 
     if (!res.ok) {
-      console.error(isEdit ? '댓글 수정 실패:' : '댓글 등록 실패:', res.status);
       return;
     }
 
@@ -378,7 +366,6 @@ const handleCommentToggle = (postId) => {
     // 최신 댓글 목록 다시 조회
     await fetchComments(postId);
   } catch (err) {
-    console.error(isEdit ? '댓글 수정 에러:' : '댓글 등록 에러:', err);
   }
 };
 
@@ -388,7 +375,6 @@ const handleCommentDelete = async (postId, commentId) => {
   try {
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      console.error("로그인 토큰이 없습니다.");
       return;
     }
 
@@ -401,7 +387,6 @@ const handleCommentDelete = async (postId, commentId) => {
     });
 
     if (!res.ok) {
-      console.error("댓글 삭제 실패:", res.status);
       return;
     }
 
@@ -436,7 +421,6 @@ const handleCommentDelete = async (postId, commentId) => {
       );
     }, 220); // index.css 의 animation 시간(0.25s)이랑 비슷하게
   } catch (e) {
-    console.error("댓글 삭제 에러:", e);
   }
 };
 
@@ -457,14 +441,12 @@ const handlePostDelete = async (postId) => {
     });
 
     if (!res.ok) {
-      console.error("게시글 삭제 실패:", res.status);
       return;
     }
 
     // 프론트 목록에서 해당 게시글 제거
     setFeedData((prev) => prev.filter((post) => post.id === undefined ? true : post.id !== postId));
   } catch (e) {
-    console.error("게시글 삭제 에러:", e);
   }
 };
 
@@ -507,7 +489,6 @@ const handleReportSubmit = async (postId, reason, content) => {
 
     alert("신고가 접수되었습니다.");
   } catch (err) {
-    console.error("신고 에러:", err);
     alert("신고 처리 중 오류 발생");
   }
 };
@@ -554,7 +535,6 @@ const handleCommentReportSubmit = async (commentId, reason, content) => {
 
     alert("댓글 신고가 접수되었습니다.");
   } catch (err) {
-    console.error("댓글 신고 에러:", err);
     alert("댓글 신고 처리 중 오류가 발생했습니다.");
   }
 };

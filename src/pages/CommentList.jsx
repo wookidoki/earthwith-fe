@@ -19,28 +19,23 @@ const CommentList = () => {
       const memberNo = localStorage.getItem('memberNo');
       
       if (!memberNo) {
-        console.error('memberNo가 없습니다.');
         setLoading(false);
         return;
       }
       
-      console.log('API 요청:', `http://34.218.225.105:8080/api/members/comments?memberNo=${memberNo}&page=${currentPage}`);
       
       const response = await fetch(
         `http://34.218.225.105:8080/api/members/comments?memberNo=${memberNo}&page=${currentPage}`
       );
       
-      console.log('API 응답 상태:', response.status);
       
       const data = await response.json();
-      console.log('받은 데이터:', data);
       
       // null 필터링
       const filteredList = (data.list || []).filter(item => item !== null);
       setComments(filteredList);
       setPageInfo(data.pageInfo);
     } catch (error) {
-      console.error('댓글 로드 실패:', error);
     } finally {
       setLoading(false);
     }

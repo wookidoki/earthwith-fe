@@ -15,7 +15,6 @@ const PostList = () => {
 
     // memberNo가 없으면 경고
     if (!memberNo) {
-      console.error('memberNo가 없습니다. 로그인이 필요합니다.');
       // 로그인 페이지로 리다이렉트 (선택사항)
       // navigate('/login');
       return;
@@ -31,28 +30,23 @@ const PostList = () => {
       
       // memberNo 체크
       if (!memberNo) {
-        console.error('memberNo가 없습니다.');
         setLoading(false);
         return;
       }
       
-      console.log('API 요청:', `http://34.218.225.105:8080/api/members/posts?memberNo=${memberNo}&page=${currentPage}`);
       
       const response = await fetch(
         `http://34.218.225.105:8080/api/members/posts?memberNo=${memberNo}&page=${currentPage}`
       );
       
-      console.log('API 응답 상태:', response.status);
       
       const data = await response.json();
-      console.log('받은 데이터:', data);
       
       // null 필터링
       const filteredList = (data.list || []).filter(item => item !== null);
       setPosts(filteredList);
       setPageInfo(data.pageInfo);
     } catch (error) {
-      console.error('게시글 로드 실패:', error);
     } finally {
       setLoading(false);
     }

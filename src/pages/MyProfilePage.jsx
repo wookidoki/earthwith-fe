@@ -29,11 +29,6 @@ const MyProfilePage = () => {
       return;
     }
 
-    console.log('===== MyProfilePage 디버깅 =====');
-    console.log('auth 객체:', auth);
-    console.log('auth.isAuthenticated:', auth.isAuthenticated);
-    console.log('auth.memberNo:', auth.memberNo);
-    console.log('localStorage.memberNo:', memberNo);
     
     // 방법 1: auth에서 직접 가져오기
     if (auth.isAuthenticated && auth.memberNo) {
@@ -47,7 +42,6 @@ const MyProfilePage = () => {
         enrollDate: auth.enrollDate
       };
       
-      console.log('✅ auth에서 사용자 데이터 설정:', userData);
       setUser(userData);
     } 
     // 방법 2: localStorage에서 가져오기 (백업)
@@ -62,11 +56,9 @@ const MyProfilePage = () => {
         enrollDate: localStorage.getItem('enrollDate') || '2024.01.15'
       };
       
-      console.log('✅ localStorage에서 사용자 데이터 설정:', userData);
       setUser(userData);
     } else {
       // ⭐ memberNo가 없으면 로그인 페이지로 리다이렉트
-      console.error('❌ memberNo를 찾을 수 없습니다. 로그인 페이지로 이동합니다.');
       alert('로그인이 필요합니다.');
       navigate('/login');
       return;
@@ -80,11 +72,9 @@ const MyProfilePage = () => {
       const memberNo = auth.memberNo || localStorage.getItem('memberNo');
       
       if (!memberNo) {
-        console.error('통계 로드 실패: memberNo가 없습니다.');
         return;
       }
 
-      console.log('📊 통계 로드 중... memberNo:', memberNo);
       
       const [postsRes, commentsRes, likesRes, bookmarksRes] = await Promise.all([
         fetch(`http://34.218.225.105:8080/api/members/posts?memberNo=${memberNo}&page=1`),
@@ -107,15 +97,12 @@ const MyProfilePage = () => {
         bookmarks: bookmarksData.pageInfo?.listCount || 0
       };
 
-      console.log('✅ 통계 로드 완료:', newStats);
       setStats(newStats);
     } catch (error) {
-      console.error('❌ 통계 로드 실패:', error);
     }
   };
 
   useEffect(() => {
-    console.log('👤 user 상태 업데이트:', user);
   }, [user]);
 
   // ⭐ 로딩 중일 때 표시

@@ -11,11 +11,9 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
 
   // user.memberImage가 변경될 때마다 imageUrl 업데이트
   useEffect(() => {
-    console.log('👤 user.memberImage 변경:', user?.memberImage);
     
     if (user?.memberImage) {
       const fullUrl = getImageUrl(user.memberImage);
-      console.log('🖼️ 새 이미지 URL:', fullUrl);
       setImageUrl(fullUrl);
     } else {
       setImageUrl(null);
@@ -49,7 +47,6 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
       return;
     }
 
-    console.log('📤 이미지 업로드 시작:', file.name);
 
     try {
       const formData = new FormData();
@@ -69,7 +66,6 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
         body: formData
       });
 
-      console.log('📥 응답 상태:', response.status);
 
       if (response.ok) {
         // ⭐ 서버에서 새 경로 받기 (JSON으로 변경한 경우)
@@ -81,11 +77,9 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
         const extension = file.name.substring(file.name.lastIndexOf('.'));
         const newImagePath = `/upload/${timestamp}${extension}`;
         
-        console.log('✅ 새 이미지 경로:', newImagePath);
         
         // ⭐ 1. localStorage 업데이트
         localStorage.setItem('memberImage', newImagePath);
-        console.log('✅ localStorage 업데이트 완료');
         
         // ⭐ 2. React state 즉시 업데이트 (가장 중요!)
         if (setUser) {
@@ -94,13 +88,10 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
               ...prevUser,
               memberImage: newImagePath
             };
-            console.log('✅ user state 업데이트:', updatedUser);
             return updatedUser;
           });
-        } else {
-          console.error('❌ setUser가 없습니다! MyProfilePage에서 전달했는지 확인하세요.');
         }
-        
+
         // ⭐ 3. 로컬 이미지 URL도 즉시 업데이트
         setImageUrl(getImageUrl(newImagePath));
         
@@ -108,11 +99,9 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
         
       } else {
         const errorText = await response.text();
-        console.error('❌ 업로드 실패:', errorText);
         alert(`업로드 실패: ${errorText}`);
       }
     } catch (error) {
-      console.error('❌ 네트워크 오류:', error);
       alert('업로드 중 오류가 발생했습니다.');
     }
   };
@@ -140,11 +129,7 @@ const ProfileHeader = ({ user, stats, setUser }) => { // ⭐ setUser props 필�
                 alt="프로필" 
                 className="w-full h-full object-cover"
                 key={imageUrl} // ⭐ key로 강제 리렌더링
-                onLoad={() => {
-                  console.log('✅ 이미지 로드 성공:', imageUrl);
-                }}
                 onError={(e) => {
-                  console.error('❌ 이미지 로드 실패:', imageUrl);
                   e.target.style.display = 'none';
                 }}
               />
